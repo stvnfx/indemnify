@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp spec="6.0+" codebase="http://cascott.co.za/download/indemnity/jaws/" href="Indemnityins.jnlp">
+  <information>
+    <title>Indemnity Insurance Document Generator.</title>
+    <description>Indemnity Insurance Document generator. Visit http://cascott.co.za/financial-tools/fidelity-insurance-assessment for more information.</description>
+    <description kind="short">Indemnity Insurance Document generator.</description>
+    <vendor>CA Scott.</vendor>
+    <homepage href="http://cascott.co.za/"/>
+    <offline-allowed/> 
+    <icon href="icon.png" kind="shortcut"/>
+    <icon href="icon.png"/>
+    <shortcut online="true">
+      <desktop/>
+      <menu submenu="CA Scott"/>
+    </shortcut>
+  </information>
+  <update check="always" policy="prompt-update"/>
+  <security>
+      <all-permissions/>
+  </security>
+  <resources>
+    <!-- <property name="jnlp.packEnabled" value="true"/> -->
+    <j2se version="1.6.0+" />
+    <jar href="libs/Indemnityins.jar" main="true" download="eager"/>
+    <jar href="libs/core-renderer.jar" download="eager" />
+    <jar href="libs/forms-1.3.0.jar" download="eager" />
+    <jar href="libs/iText-2.0.8.jar" download="eager" />
+    <jar href="libs/jcalendar-1.4.jar" download="eager" />
+    <jar href="libs/jmte-2.2.jar" download="eager" />
+    <jar href="libs/miglayout-4.0-swing.jar" download="eager" />
+  </resources>
+  <application-desc main-class="cascott.Main"/>
+</jnlp>
+

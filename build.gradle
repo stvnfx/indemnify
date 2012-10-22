@@ -1,0 +1,62 @@
+/*
+  ________     ____         __  __
+ / ___/ _ |   / __/______  / /_/ /_
+/ /__/ __ |  _\ \/ __/ _ \/ __/ __/
+\___/_/ |_| /___/\__/\___/\__/\__/
+
+=== C.A. Scott Consulting Actuary ===
+Copyright (c) 2012 CA Scott
+
+ */
+
+apply plugin: 'java'
+
+/* Some things are only clear in ANT or was made just for ANT. */
+ant.importBuild 'build.xml'
+
+class Version {
+    int major, minor, patch
+
+    String toString() {
+        "$major.$minor.$patch"
+    }
+}
+
+project.ext.set("version", new Version(major: 1, minor: 3, patch: 0))
+
+task printVersion {
+    doFirst {
+        println "Project version is $version"
+    }
+}
+
+defaultTasks 'printVersion'
+
+repositories {
+    flatDir {
+        dirs 'lib'
+    }
+}
+
+dependencies {
+    //This will change and the deps will be removed.
+    compile fileTree(dir: 'lib', include: '*.jar')
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+sourceCompatibility = 1.7
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'za.co.cascott.indemnity.Main'
+    }
+
+    version = project.version
+}
+
+test {
+    beforeTest { descriptor ->
+        logger.lifecycle("Running test: " + descriptor)
+    }
+}
+

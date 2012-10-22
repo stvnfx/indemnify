@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ________     ____         __  __ 
+ / ___/ _ |   / __/______  / /_/ /_
+/ /__/ __ |  _\ \/ __/ _ \/ __/ __/
+\___/_/ |_| /___/\__/\___/\__/\__/ 
+
+Copyright (c) 2012 CA Scott.
+Contact: support@cascott.co.za
+Date: 13/06/2012
+
+Using the Mustache Template language.
+Docs: http://mustache.github.com/mustache.5.html
+
+Avaliable Variables:
+  EffectiveDate
+  FundName
+  InForceCover
+  MemberNumber
+  AnnualCons
+  InvestmentValue
+  AverageTopTenDeathBens
+  AverageTopTenMemberShares
+  MinimumCover
+  RecText
+  CoverFrom
+  CoverTo
+  RetroDate
+  AnnualPremium
+  InForceCover
+  Excess
+  ClaimsYN
+  HighestClaim
+  AggregateClaim
+  MemberNumber
+  AnnualCons
+  InvestmentValue
+  TopMemberShareLoss
+  TopShare1
+  TopShare2
+  TopShare3
+  TopShare4
+  TopShare5
+  TopShare6
+  TopShare7
+  TopShare8
+  TopShare9
+  TopShare10
+  TopDth1
+  TopDth2
+  TopDth3
+  TopDth4
+  TopDth5
+  TopDth6
+  TopDth7
+  TopDth8
+  TopDth9
+  TopDth10
+
+-->
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format">
+  <fo:layout-master-set>
+    <!-- layout for all pages -->
+    <fo:simple-page-master master-name="all"
+                  page-height="29.7cm"
+                  page-width="21cm"
+                  margin-top="2.8cm"
+                  margin-bottom="2.5cm"
+                  margin-left="3cm"
+                  margin-right="2.6cm">
+      <fo:region-body margin-top="3cm" margin-bottom="2cm"/>
+      <fo:region-before extent="3cm"/>
+      <fo:region-after extent="2cm"/>
+    </fo:simple-page-master>
+    </fo:layout-master-set>
+
+  <fo:page-sequence master-reference="all">
+
+    <fo:static-content flow-name="xsl-region-before">
+    <fo:block font-size="10pt" text-align="start"
+      border-style="solid" border-color="blue" border-width="0.5pt">
+    This is the Header
+    </fo:block>
+  </fo:static-content>
+
+    <fo:static-content flow-name="xsl-region-after">
+    <fo:block font-size="10pt" text-align="start"
+      border-style="solid" border-color="blue" border-width="0.5pt">
+    This is the Footer
+    </fo:block>
+  </fo:static-content>
+
+    <fo:flow flow-name="xsl-region-body">
+      <fo:block font-size="14pt" font-family="Times New Roman" text-decoration="underline" font-weight="bold" line-height="20pt"  text-align="center" >
+        Section 1 - Introduction
+      </fo:block>
+
+      <fo:block font-size="12pt" font-family="sans-serif" space-after.optimum="15pt">
+        <fo:inline font-weight="bold">1.1</fo:inline> <fo:inline font-weight="bold" text-decoration="underline">Scope of report</fo:inline>
+      </fo:block>
+
+      <fo:block font-size="12pt" text-align="justify" space-after.optimum="15pt">
+The purpose of this report is to assess the levels of indemnity insurance cover in place as at {{EffectiveDate}}, regarding the risks covered as well as the quantum of cover, in respect of the {{FundName}}
+    </fo:block>
+
+<fo:block text-align="justify"></fo:block>
+
+      <fo:block font-size="12pt" text-align="justify" space-after.optimum="15pt">
+It is not possible to make a fully informed recommendation regarding the level of indemnity insurance cover necessary without carrying out a comprehensive risk assessment in respect of the Fund. The recommendations made in this report are therefore based on the information provided, and on the assumption that the Fund follows the guidelines and principles set out in the Financial Services Board’s (“FSB”) Circular PF 130.
+    </fo:block>
+
+      <fo:block font-size="12pt" font-family="sans-serif" space-after.optimum="15pt">
+        <fo:inline font-weight="bold">1.2</fo:inline> <fo:inline font-weight="bold" text-decoration="underline">Need for Indemnity Insurance</fo:inline>
+      </fo:block>
+
+<fo:block font-size="12pt" text-align="justify" space-after.optimum="15pt">
+Regulation 30(2)(u) of the Pension Funds Act (“the Act”) requires the rules of a fund to provide for “the policy of insurance effected to indemnify the pension fund against losses owing to the dishonesty or fraud of any of its officials, or such other indemnification as the Registrar may allow”.
+</fo:block>
+
+<fo:block text-align="justify"></fo:block>
+
+<fo:block font-size="12pt" text-align="justify" space-after.optimum="15pt">
+Retirement funds’ financial statements must contain a certification by the Trustees that they have “ensured that fidelity cover was maintained. The cover was deemed adequate and in compliance with the rules of the fund”. Circular PF 130 requires that the Trustees carefully consider the quantum of indemnity insurance cover to ensure that it is appropriate and, where necessary, to take expert advice in that regard.
+</fo:block>
+
+<fo:block text-align="justify"></fo:block>
+
+<fo:block font-size="12pt" text-align="justify" space-after.optimum="15pt">
+Circular PF 130 also requires that the Trustees should have indemnity insurance themselves, either provided by the fund or by the sponsor of the fund. The Trustees should also require that each service provider to the fund has adequate insurance cover, so that the Fund’s rights of recourse against those service providers are safeguarded.
+</fo:block>
+
+<fo:block text-align="justify"></fo:block>
+
+<fo:block font-size="12pt" text-align="justify" space-after.optimum="15pt">
+The contents of Circular PF 130 make it clear that the Trustees are responsible for ensuring that the Fund has adequate insurance cover, that they should seek professional advice if necessary, and that they would be held responsible if the Fund was found to be under-insured.
+</fo:block>
+
+      <fo:block font-size="12pt" font-family="sans-serif" space-after.optimum="15pt">
+        <fo:inline font-weight="bold">1.3</fo:inline> <fo:inline font-weight="bold" text-decoration="underline">Information supplied</fo:inline>
+      </fo:block>
+
+<fo:block font-size="12pt" text-align="justify" space-after.optimum="15pt">
+The following information was supplied in respect of the Fund by the Principal Officer.
+</fo:block>
+
+    </fo:flow>
+  </fo:page-sequence>
+</fo:root>
+

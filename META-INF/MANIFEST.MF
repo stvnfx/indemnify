@@ -1,0 +1,8 @@
+Manifest-Version: 1.0.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Indemnity
+Bundle-SymbolicName: Indemnity
+Bundle-Version: 1.0.0
+Application-Icon: pic.png
+Bundle-Activator: za.co.cascott.indemnity.IndemnityActivator
+Main-Class: za.co.cascott.indemnity.Main

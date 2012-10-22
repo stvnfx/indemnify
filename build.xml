@@ -1,0 +1,229 @@
+<!-- 
+  ________     ____         __  __ 
+ / ___/ _ |   / __/______  / /_/ /_
+/ /__/ __ |  _\ \/ __/ _ \/ __/ __/
+\___/_/ |_| /___/\__/\___/\__/\__/ 
+
+=== C.A. Scott Consulting Actuary ===
+Copyright (c) 2012 CA Scott
+
+-->
+<project name="Indemnity" default="onejar" basedir=".">
+    <description>
+        Indemnity Insurance.
+        A application to assist trustees in determining an appropriate level of fidelity cover for their funds.
+    </description>
+
+    <property name="src"  location="src"/>
+    <property name="build"  location="build"/>
+    <property name="dist"  location="dist"/>
+    <!-- <property name="launch4j.dir"  location="C:\Program Files (x86)\Launch4j"/> -->
+    <property name="libs" value="./lib"/>
+
+    <property name="outputname"  value="Indemnify"/>
+
+    <property name="finaljar" value="${dist}/lib"/>
+
+    <property file="build.properties"/>
+
+    <property name="build.number" value="${build.major.number}.${build.minor.number}.${build.patch.number}"/>
+
+    <target name="init">
+        <tstamp/>
+        <!-- Create the build directory structure used by compile -->
+        <mkdir dir="${build}"/>
+    </target>
+
+    <target name="yguard">
+        <taskdef name="yguard"
+            classname="com.yworks.yguard.YGuardTask"
+            classpath="ant/yguard.jar"/>
+        <mkdir dir="${dist}/pre-obfuscate/"/>
+        <move file="${dist}/${outputname}-${build.major.number}.${build.minor.number}.${build.patch.number}.jar" todir="${dist}/pre-obfuscate/"/>
+        <yguard>
+            <inoutpair in="${dist}/pre-obfuscate/${outputname}-${build.major.number}.${build.minor.number}.${build.patch.number}.jar" out="${dist}/${outputname}-${build.major.number}.${build.minor.number}.${build.patch.number}.jar"/>
+            <shrink logfile="shrinklog.xml">
+                <property name="error-checking" value="pedantic"/>
+                <keep>
+                    <method class="za.co.cascott.*" />
+                    <method name="void main(java.lang.String[])" class="za.co.cascott.indemnity.Main" />
+                    <class classes="private"/>
+                </keep>
+            </shrink>
+            <rename mainclass="za.co.cascott.indemnity.Main"></rename>
+        </yguard>
+    </target>
+
+    <target name="yguard2">
+        <taskdef name="yguard"
+                 classname="com.yworks.yguard.YGuardTask"
+                 classpath="ant/yguard.jar"/>
+        <yguard>
+            <inoutpair in="build/libs/Indemnify-1.3.3.jar" out="build/libs/Indemnify-1.3.3.jar1"/>
+            <shrink logfile="shrinklog.xml">
+                <property name="error-checking" value="pedantic"/>
+                <keep>
+                    <method class="za.co.cascott.*" />
+                    <method name="void main(java.lang.String[])" class="za.co.cascott.indemnity.Main" />
+                    <class classes="private"/>
+                </keep>
+            </shrink>
+            <rename mainclass="za.co.cascott.indemnity.Main"></rename>
+        </yguard>
+    </target>
+
+    <target name="compile" depends="init" >
+        <javac srcdir="${src}"
+            destdir="${build}"
+            excludes="${libs}"
+            debug="on"
+            debuglevel="source"
+            failonerror="true"
+            includeantruntime="false"> <!-- vars, and source" -->
+            <classpath>
+                <fileset dir="${libs}/">
+                    <include name="*.jar"/>
+                </fileset>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="mainjar" depends="compile, buildinfo">
+        <!-- <mkdir dir="${dist}/lib"/> -->
+        <path>
+            <fileset dir="${libs}/">
+            <include name="*.jar"/>
+            </fileset>
+        </path>
+
+        <fileset id="assets" dir="${src}/main/resources/assets"> 
+        </fileset> 
+
+        <copy todir="${build}/assets"> 
+            <fileset refid="assets"/> 
+        </copy> 
+
+        <fileset id="lib" dir="lib"></fileset>
+
+        <mkdir dir="${dist}/lib"/>
+
+        <copy todir="${dist}/lib">
+            <fileset refid="lib"/>
+        </copy>
+
+        <path id="build-classpath">
+            <fileset dir="${dist}/lib">
+                <include name="*.jar"/>
+            </fileset>
+        </path>
+
+        <jar jarfile="${dist}/${outputname}-${build.major.number}.${build.minor.number}.${build.patch.number}.jar" basedir="${build}">
+        <!-- <zipgroupfileset dir="${libs}" includes="**/*.jar" excludes="META-INF/**/*" /> -->
+            <manifest>
+                <attribute name="Main-Class" value="za.co.cascott.indemnity.Main"/>
+
+                <!--These is for OSGi-->
+                <!--<attribute name="Bundle-ManifestVersion" value="2"/>-->
+                <!--<attribute name="Bundle-Name" value="Indemnity"/>-->
+                <!--<attribute name="Bundle-SymbolicName" value="Indemnity"/>-->
+                <!--<attribute name="Bundle-Version" value="2.0"/>-->
+                <!--<attribute name="Bundle-Activator" value="za.co.cascott.indemnity.IndemnityActivator"/>-->
+                <!--<attribute name="Application-Icon" value="pic.png"/>-->
+                <attribute name="Class-Path" value="${lib.list}"/>
+                <!--<attribute name="Import-Package" value="javax.swing,javax.swing.border,org.osgi.framework"/>-->
+            </manifest>
+        </jar>
+
+        <delete file="${dist}/keystore"/>
+
+        <genkey alias="cascott" storepass="auh1lh0j0" keystore="${dist}/keystore">
+            <dname>
+                <param name="CN" value="CA Scott"/>
+                <param name="OU" value="Software"/>
+                <param name="O"  value="cascott.co.za"/>
+                <param name="C"  value="ZA"/>
+            </dname>
+        </genkey>
+        
+
+        <signjar keystore="${dist}/keystore"
+        jar="${dist}/Indemnityins.jar" 
+        alias="cascott" 
+        storepass="auh1lh0j0" />
+
+    </target>
+
+    <target name="current-number">
+        <echo>Current build number:${build.number}</echo>
+    </target>
+
+    <target name="buildinfo">
+
+        <tstamp>
+            <format property="builtat" pattern="MM/dd/yyyy"/>
+        </tstamp>
+
+        <exec executable="hg" outputproperty="hgver">
+            <arg value="id"/>
+            <arg value="-i"/>
+        </exec>
+        <echo message="${hgver}"/>
+
+		<exec executable="hostname" outputproperty="hostname"/>
+        <echo message="${hostname}"/>
+
+        <propertyfile file="src/main/resources/assets/project.properties">
+            <entry key="buildtime" value="${builtat}"/>
+            <entry key="buildhost" value="${hostname}"/>
+            <entry key="major" value="${build.major.number}"/>
+            <entry key="minor" value="${build.minor.number}"/>
+            <entry key="patch" value="${build.patch.number}"/>
+            <entry key="rcver" value="${hgver}"/>
+        </propertyfile>
+
+    </target>
+
+    <target name="onejar">
+        <property name="one-jar.dist.dir" value="."/>   
+        <property name="one-jar.version" value="0.97"/>
+        <property name="one-jar.ant.jar" value="${one-jar.dist.dir}/one-jar-ant-task-${one-jar.version}.jar"/>
+        <taskdef name="one-jar" classname="com.simontuffs.onejar.ant.OneJarTask" classpath="ant/one-jar-ant-task-0.97.jar" onerror="report"/>
+        <mkdir dir="${dist}/single/"/>
+        <one-jar destfile="${dist}/single/Indemnity-${build.major.number}.${build.minor.number}.${build.patch.number}.jar">
+            <manifest>
+                <attribute name="Created-By" value="CA Scott."/>
+            </manifest>
+            <main jar="dist/Indemnify-1.3.3.jar" />
+            <!--<main jar="dist/Indemnity-${build.major.number}.${build.minor.number}.${build.patch.number}.jar" />-->
+            <lib>
+                <fileset dir="lib/" includes="**/*.jar" />
+            </lib>
+        </one-jar>
+    </target>
+
+    <target name="webstart">
+        <mkdir dir="${dist}/jaws/"/>
+        <mkdir dir="${dist}/jaws/lib"/>
+
+        <fileset id="libs" dir="${dist}/lib">
+        </fileset>
+
+        <copy todir="${dist}/jaws/lib">
+            <fileset refid="libs"/>
+        </copy>
+
+        <copy file="${dist}/Indemnity-${build.major.number}.${build.minor.number}.${build.patch.number}.jar" tofile="${dist}/jaws/lib/Indemnify.jar"/>
+
+        <copy file="Indemnify.jnlp" todir="${dist}/jaws/"/>
+
+        <signjar destDir="${dist}/jaws/lib/"
+            alias="cascott" keystore="${dist}/keystore"
+            storepass="auh1lh0j0"
+            preservelastmodified="true">
+            <path>
+                <fileset dir="dist/jaws/lib" includes="**/*.jar" />
+            </path>
+            <flattenmapper />
+        </signjar>
+    </target>
+</project>
