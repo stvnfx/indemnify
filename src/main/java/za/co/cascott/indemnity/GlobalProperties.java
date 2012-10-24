@@ -128,7 +128,7 @@ public class GlobalProperties {
             this.buildtime = p.getProperty("buildtime");
             this.major = p.getProperty("major");
             this.minor = p.getProperty("minor");
-            this.build = p.getProperty("build");
+            this.build = p.getProperty("patch");
             this.rcver = p.getProperty("rcver");
             this.version = major + "." + minor + "." + build;
             is.close();

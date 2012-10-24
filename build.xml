@@ -163,11 +163,11 @@ Copyright (c) 2012 CA Scott
             <format property="builtat" pattern="MM/dd/yyyy"/>
         </tstamp>
 
-        <exec executable="hg" outputproperty="hgver">
-            <arg value="id"/>
-            <arg value="-i"/>
+        <exec executable="git" outputproperty="gitver">
+            <arg value="rev-parse"/>
+            <arg value="HEAD"/>
         </exec>
-        <echo message="${hgver}"/>
+        <echo message="${gitver}"/>
 
 		<exec executable="hostname" outputproperty="hostname"/>
         <echo message="${hostname}"/>
@@ -178,7 +178,7 @@ Copyright (c) 2012 CA Scott
             <entry key="major" value="${build.major.number}"/>
             <entry key="minor" value="${build.minor.number}"/>
             <entry key="patch" value="${build.patch.number}"/>
-            <entry key="rcver" value="${hgver}"/>
+            <entry key="rcver" value="${gitver}"/>
         </propertyfile>
 
     </target>
@@ -189,12 +189,11 @@ Copyright (c) 2012 CA Scott
         <property name="one-jar.ant.jar" value="${one-jar.dist.dir}/one-jar-ant-task-${one-jar.version}.jar"/>
         <taskdef name="one-jar" classname="com.simontuffs.onejar.ant.OneJarTask" classpath="ant/one-jar-ant-task-0.97.jar" onerror="report"/>
         <mkdir dir="${dist}/single/"/>
-        <one-jar destfile="${dist}/single/Indemnity-${build.major.number}.${build.minor.number}.${build.patch.number}.jar">
+        <one-jar destfile="${dist}/single/Indemnify-${build.major.number}.${build.minor.number}.${build.patch.number}.jar">
             <manifest>
                 <attribute name="Created-By" value="CA Scott."/>
             </manifest>
-            <main jar="dist/Indemnify-1.3.3.jar" />
-            <!--<main jar="dist/Indemnity-${build.major.number}.${build.minor.number}.${build.patch.number}.jar" />-->
+            <main jar="dist/Indemnify-${build.major.number}.${build.minor.number}.${build.patch.number}.jar" />
             <lib>
                 <fileset dir="lib/" includes="**/*.jar" />
             </lib>
