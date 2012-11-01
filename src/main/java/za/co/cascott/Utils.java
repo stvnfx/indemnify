@@ -34,6 +34,7 @@ public class Utils {
         }
 
         public static SortedMap<String, String> getMap(String dbname) {
+            logger.log(Level.FINEST, "Getting Map " + dbname);
             DB database = getDatabase(dbname);
             SortedMap<String, String> map;
             try {

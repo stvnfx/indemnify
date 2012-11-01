@@ -44,12 +44,16 @@ Thumbs.db
 *.un~
 Session.vim
 .netrwhist11
+.*.swp
 
 # Gradle #
 ##########
 .gradle/
+build/
+dist/
 
 # Package Files #
 *.jar
 *.war
 *.ear
+
