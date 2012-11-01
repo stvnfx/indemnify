@@ -137,24 +137,16 @@ public class WizardSavePanel extends WizardPanelDescriptor {
             else
                 outpath = chooser.getSelectedFile().getPath();
 
-            final TemplateEngine templateEngine = new TemplateEngine(this.wiz.getDataCollection());
             SwingWorker worker = new SwingWorker() {
 
                 public String doInBackground() throws Exception {
                     URL ref = null;
                     try {
-//                        templateEngine.createPDF(templateEngine.processFile("/assets/full_loading.html"), outpath);
-//                        URL ref;
-//                        ref = new File(templateEngine.getLastGenFileString()).toURL();
-//                        controller.openDocument(ref.toExternalForm());
-                        //xpanel.setDocument(ref.toExternalForm());
-                        //xpanel.setDocument(ref.toExternalForm());
-                        MustacheEngine tmplateE = new MustacheEngine();
-                        tmplateE.setVariable("name", "TESSSST");
-                        //templateEngine.createPDF(templateEngine.processFile("/assets/main.html"), outpath);
-                        FOP.getInstance().processFile("/assets/fo/full_loading.fo", outpath, tmplateE);
+                        MustacheEngine templateEngine = new MustacheEngine();
+                        templateEngine.setVariables(getWizard().getDataCollection().getModel());
+                        FOP.getInstance().processFile("/assets/fo/full_loading.fo", outpath, templateEngine);
                         ref = new File(outpath).toURL();
-			controller.openDocument(ref);
+                        controller.openDocument(ref);
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     } catch (Exception e) {
@@ -198,21 +190,14 @@ public class WizardSavePanel extends WizardPanelDescriptor {
                 outpath = chooser.getSelectedFile().getPath() + ".pdf";
             else
                 outpath = chooser.getSelectedFile().getPath();
-            final TemplateEngine templateEngine = new TemplateEngine(this.wiz.getDataCollection());
-            SwingWorker worker = new SwingWorker() {
 
+            SwingWorker worker = new SwingWorker() {
                 public String doInBackground() throws Exception {
                     URL ref = null;
                     try {
-//                        templateEngine.createPDF(templateEngine.processFile("/assets/short_loading.html"), outpath);
-//                        URL ref;
-//                        ref = new File(templateEngine.getLastGenFileString()).toURL(); //Deprecated. Replace with something similar.
-//                        controller.openDocument(ref.toExternalForm());
-                        //xpanel.setDocument(ref.toExternalForm());
-                        MustacheEngine tmplateE = new MustacheEngine();
-                        tmplateE.setVariable("name", "TESSSST");
-                        //templateEngine.createPDF(templateEngine.processFile("/assets/main.html"), outpath);
-                        FOP.getInstance().processFile("/assets/fo/short_loading.fo", outpath, tmplateE);
+                        MustacheEngine templateEngine = new MustacheEngine();
+                        templateEngine.setVariables(getWizard().getDataCollection().getModel());
+                        FOP.getInstance().processFile("/assets/fo/short_loading.fo", outpath, templateEngine);
                         ref = new File(outpath).toURL();
                         controller.openDocument(ref);
                     } catch (MalformedURLException e) {
@@ -262,9 +247,6 @@ public class WizardSavePanel extends WizardPanelDescriptor {
             else
                 outpath = chooser.getSelectedFile().getPath();
 
-            final MustacheEngine templateEngine = new MustacheEngine();
-            //this.wiz.getDataCollection())
-
             SwingWorker worker = new SwingWorker() {
 
                 public String doInBackground() throws Exception {
@@ -272,10 +254,8 @@ public class WizardSavePanel extends WizardPanelDescriptor {
 
                     URL ref = null;
                     try {
-
-                        MustacheEngine tmplateE = new MustacheEngine();
-                        tmplateE.setVariable("name", "TESSSST");
-                        //templateEngine.createPDF(templateEngine.processFile("/assets/main.html"), outpath);
+                        MustacheEngine templateEngine = new MustacheEngine();
+                        templateEngine.setVariables(getWizard().getDataCollection().getModel());
                         FOP.getInstance().processFile("/assets/fo/main.fo", outpath, templateEngine);
                         ref = new File(outpath).toURL();
                         controller.openDocument(ref);
