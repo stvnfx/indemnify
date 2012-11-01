@@ -19,7 +19,7 @@ public class Utils {
     public static class Database {
         private static Logger logger = Logger.getLogger(Database.class.getName());
 
-        private static HashMap<String, DB> databases = new HashMap<>();
+        private static HashMap<String, DB> databases = new HashMap();
 
         private static DB getDatabase(String dbname) {
             logger.log(Level.FINEST, "Getting Named Database " + dbname);
