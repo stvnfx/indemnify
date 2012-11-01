@@ -46,7 +46,6 @@ public class GlobalProperties {
         if (dir.isDirectory()) {
             return false;
         } else {
-
             return true;
         }
     }

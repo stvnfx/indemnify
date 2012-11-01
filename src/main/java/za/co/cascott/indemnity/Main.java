@@ -226,7 +226,6 @@ public class Main {
         Utils.Database.getMap("database").put("Firs Run", new Date().toString());
         Utils.Database.getMap("database").put("Run Times", "0");
         Utils.Database.save("database");
-        Utils.Database.close("database");
     }
 
     public static Channel getChannel() {
