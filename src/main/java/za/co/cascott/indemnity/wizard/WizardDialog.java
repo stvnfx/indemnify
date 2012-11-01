@@ -50,23 +50,12 @@ public class WizardDialog extends JFrame {
     private JMenuItem saveasinput;
     private JMenuItem btnLogger;
 
-    private JMenuItem btnIssue;
-    private JMenuItem btnFeedback;
-
     private JButton btnReaderButton;
     private Component horizontalStrut;
     private JButton btnOptions;
 
     public JPanel getContentPanel() {
         return contentPanel;
-    }
-
-    public JMenuItem getBtnFeedback() {
-        return btnFeedback;
-    }
-
-    public JMenuItem getBtnIssue() {
-        return btnIssue;
     }
 
     /**
@@ -150,9 +139,7 @@ public class WizardDialog extends JFrame {
                 btnReaderButton = new JButton("Read PF130");
                 btnReaderButton.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        //ReaderSystem.getReaderSystemObject().showWindow();
-                        //ReaderSystem.getReaderSystemObject().setButtonDisabler(btnReaderButton);
-                        //ReaderSystem.getReaderSystemObject().setInternalPage("/assets/docs/pf130/pf130.xhtml");
+
                         Runnable toRun = new Runnable() {
                             public void run() {
                                 try {
@@ -174,40 +161,6 @@ public class WizardDialog extends JFrame {
                 {
                     mnu = new JPopupMenu();
 
-                    // saveinput = new JMenuItem();
-                    // saveinput.setIcon(new ImageIcon(WizardDialog.class.getResource("/assets/icons/disk.png")));
-                    // saveinput.setText("Save");
-                    // mnu.add(saveinput);
-
-                    // saveasinput = new JMenuItem();
-                    // saveasinput.setIcon(new ImageIcon(WizardDialog.class.getResource("/assets/icons/disks.png")));
-                    // saveasinput.setText("Save As...");
-                    // mnu.add(saveasinput);
-
-                    // mnu.add(new JSeparator());
-
-//					btnCalc = new JMenuItem();
-//					btnCalc.setIcon(new ImageIcon(WizardDialog.class.getResource("/assets/icons/calculator.png")));
-//					btnCalc.setText("Calculator");
-//					mnu.add(btnCalc);
-//
-//					btnCalcRPN = new JMenuItem();
-//					btnCalcRPN.setIcon(new ImageIcon(WizardDialog.class.getResource("/assets/icons/calculator-gray.png")));
-//					btnCalcRPN.setText("Calculator (RPN)");
-//					mnu.add(btnCalcRPN);
-//
-//					mnu.add(new JSeparator());
-
-                    btnIssue = new JMenuItem();
-                    btnIssue.setIcon(new ImageIcon(WizardDialog.class.getResource("/assets/icons/bug.png")));
-                    btnIssue.setText("Report an Issues");
-                    mnu.add(btnIssue);
-
-                    btnFeedback = new JMenuItem();
-                    btnFeedback.setIcon(new ImageIcon(WizardDialog.class.getResource("/assets/icons/users.png")));
-                    btnFeedback.setText("Send us Feedback");
-                    mnu.add(btnFeedback);
-
                     btnLogger = new JMenuItem();
                     btnLogger.setIcon(new ImageIcon(WizardDialog.class.getResource("/assets/icons/report--exclamation.png")));
                     btnLogger.setText("View Logger");
@@ -226,11 +179,6 @@ public class WizardDialog extends JFrame {
                     mnu.add(btnAddSampleData);
 
                     mnu.add(new JSeparator());
-
-//					btnReg = new JMenuItem();
-//					btnReg.setIcon(new ImageIcon(WizardDialog.class.getResource("/assets/icons/license-key.png")));
-//					btnReg.setText("Register");
-//					mnu.add(btnReg);
 
                     JMenuItem about = new JMenuItem();
                     about.setIcon(new ImageIcon(WizardDialog.class.getResource("/assets/icons/question.png")));
@@ -289,24 +237,7 @@ public class WizardDialog extends JFrame {
                 }
             }
         });
-//        init();
     }
-//
-//    private void init() {
-//        //Make sure its clean.
-////        rootDockingPort.clear();
-//        //DockingManager.dock(contentPanel, getRootDockingPort());
-//        JComponent leftComponent = createDockableComponent("Left Panel");
-//        JComponent lgComponent = Logger.getInstance();
-//
-//        // create and register the Docking panel
-//        DockingManager.registerDockable(contentPanel);
-//        getContentPane().add((Container)contentPanel, BorderLayout.CENTER);
-//        getRootDockingPort().dock(contentPanel, DockingConstants.CENTER_REGION);
-//        getRootDockingPort().dock(lgComponent, DockingConstants.CENTER_REGION);
-//
-//        //p.add(port, BorderLayout.NORTH);
-//    }
 
     public JPanel getMainPanel() {
         return mainPanel;

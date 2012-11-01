@@ -183,7 +183,7 @@ Copyright (c) 2012 CA Scott
 
     </target>
 
-    <target name="onejar">
+    <target name="onejar" depends="mainjar">
         <property name="one-jar.dist.dir" value="."/>   
         <property name="one-jar.version" value="0.97"/>
         <property name="one-jar.ant.jar" value="${one-jar.dist.dir}/one-jar-ant-task-${one-jar.version}.jar"/>
