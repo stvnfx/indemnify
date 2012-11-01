@@ -152,8 +152,9 @@ public class WizardSavePanel extends WizardPanelDescriptor {
                         MustacheEngine tmplateE = new MustacheEngine();
                         tmplateE.setVariable("name", "TESSSST");
                         //templateEngine.createPDF(templateEngine.processFile("/assets/main.html"), outpath);
-                        FOP.getInstance().processFile("/assets/long.fo", outpath, tmplateE);
+                        FOP.getInstance().processFile("/assets/fo/full_loading.fo", outpath, tmplateE);
                         ref = new File(outpath).toURL();
+			controller.openDocument(ref);
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     } catch (Exception e) {
@@ -211,7 +212,7 @@ public class WizardSavePanel extends WizardPanelDescriptor {
                         MustacheEngine tmplateE = new MustacheEngine();
                         tmplateE.setVariable("name", "TESSSST");
                         //templateEngine.createPDF(templateEngine.processFile("/assets/main.html"), outpath);
-                        FOP.getInstance().processFile("/assets/short.fo", outpath, tmplateE);
+                        FOP.getInstance().processFile("/assets/fo/short_loading.fo", outpath, tmplateE);
                         ref = new File(outpath).toURL();
                         controller.openDocument(ref);
                     } catch (MalformedURLException e) {
@@ -275,7 +276,7 @@ public class WizardSavePanel extends WizardPanelDescriptor {
                         MustacheEngine tmplateE = new MustacheEngine();
                         tmplateE.setVariable("name", "TESSSST");
                         //templateEngine.createPDF(templateEngine.processFile("/assets/main.html"), outpath);
-                        FOP.getInstance().processFile("/assets/iidoc.fo", outpath, templateEngine);
+                        FOP.getInstance().processFile("/assets/fo/main.fo", outpath, templateEngine);
                         ref = new File(outpath).toURL();
                         controller.openDocument(ref);
                         //xpanel.setDocument(ref.toExternalForm());
