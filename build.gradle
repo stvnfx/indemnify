@@ -60,3 +60,7 @@ test {
     }
 }
 
+task clean(overwrite: true) {
+	delete("dist")
+	delete("build")
+}

@@ -159,11 +159,6 @@ public class Main {
         StartupBackground st = new StartupBackground();
         st.setTaskName("Startup Caller");
         tasks.addTask(st);
-
-        //Update Checker checks every five minutes (default).
-        UpdateChecker uc1 = new UpdateChecker();
-        uc1.setTaskName("Update Checker");
-        tasks.addScheduledTask(uc1, 5, TimeUnit.SECONDS);
     }
 
     private static void setupLogger() {
@@ -187,7 +182,6 @@ public class Main {
 
     private static void setLookAndFeel() {
         logger.log(Level.FINE, "Changing Look and Feel.");
-        logger.log(Level.SEVERE, "Could not set JGoodies Look and Feel.");
         try {
             for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {

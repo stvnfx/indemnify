@@ -10,8 +10,6 @@
 
 package za.co.cascott.indemnity.wizard;
 
-import za.co.cascott.feedback.BugReport;
-import za.co.cascott.feedback.Feedback;
 import za.co.cascott.indemnity.Main;
 
 import javax.swing.*;
@@ -85,20 +83,6 @@ public class WizardManager {
         wizard.getWizardDialog().getBtnAddSampleData().addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 currentDescriptor.testbtnAction(arg0);
-            }
-        });
-
-        wizard.getWizardDialog().getBtnIssue().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                BugReport br = new BugReport();
-                br.setVisible(true);
-            }
-        });
-
-        wizard.getWizardDialog().getBtnFeedback().addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
-                Feedback feedback = new Feedback();
-                feedback.setVisible(true);
             }
         });
     }
