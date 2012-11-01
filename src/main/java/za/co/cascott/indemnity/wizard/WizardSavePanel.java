@@ -154,6 +154,7 @@ public class WizardSavePanel extends WizardPanelDescriptor {
                         //templateEngine.createPDF(templateEngine.processFile("/assets/main.html"), outpath);
                         FOP.getInstance().processFile("/assets/long.fo", outpath, tmplateE);
                         ref = new File(outpath).toURL();
+			controller.openDocument(ref);
                     } catch (MalformedURLException e) {
                         e.printStackTrace();
                     } catch (Exception e) {
