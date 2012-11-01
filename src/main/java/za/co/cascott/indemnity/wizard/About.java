@@ -75,8 +75,9 @@ public class About extends JDialog {
             public void mouseClicked(MouseEvent e) {
                 try {
                     java.awt.Desktop.getDesktop().browse(new URI("https://twitter.com/#!/CAScott_Actuary"));
-                } catch (IOException | URISyntaxException e1) {
-                    // TODO Auto-generated catch block
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                } catch (URISyntaxException e1) {
                     e1.printStackTrace();
                 }
             }

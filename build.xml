@@ -79,6 +79,8 @@ Copyright (c) 2012 CA Scott
             debug="on"
             debuglevel="source"
             failonerror="true"
+			target="1.6"
+			source="1.6"
             includeantruntime="false"> <!-- vars, and source" -->
             <classpath>
                 <fileset dir="${libs}/">

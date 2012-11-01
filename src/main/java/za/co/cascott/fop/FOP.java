@@ -73,9 +73,15 @@ public class FOP {
             // Step 6: Start XSLT transformation and FOP processing
             transformer.transform(src, res);
             out.close();
-        } catch (FOPException | TransformerFactoryConfigurationError | TransformerException | IOException e) {
+        } catch (FOPException e) {
+            e.printStackTrace();
+        } catch (TransformerFactoryConfigurationError e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         } finally {
-            //Clean-up
         }
     }
 
